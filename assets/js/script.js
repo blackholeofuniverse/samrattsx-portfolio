@@ -1,7 +1,7 @@
 'use strict';
 
 // element toggle function
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }  
+const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
 // sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
@@ -112,3 +112,34 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+const clickSound = new Audio('click.ogg');
+
+
+const cursorDot = document.querySelector("[data-cursor-dot]")
+const cursorOutline = document.querySelector("[data-cursor-outline]")
+
+window.addEventListener("mousemove", (e) => {
+  const posX = e.clientX
+  const posY = e.clientY
+
+  cursorDot.style.left = `${posX}px`
+  cursorDot.style.top = `${posY}px`
+
+  document.addEventListener('mousedown', () => {
+    cursorOutline.style.width = '35px'; // Increase size
+    cursorOutline.style.height = '35px';
+    clickSound.currentTime = 0; // Reset the sound to the start
+    clickSound.play(); // Play the click sound  
+  });
+
+  document.addEventListener('mouseup', () => {
+    cursorOutline.style.width = '30px'; // Original size
+    cursorOutline.style.height = '30px';
+  });
+
+  cursorOutline.animate({
+    left: `${posX}px`,
+    top: `${posY}px`
+  }, {duration: 500, fill: "forwards"})
+}); 
