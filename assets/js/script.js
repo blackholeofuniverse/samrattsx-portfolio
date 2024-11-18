@@ -69,7 +69,6 @@ for (let i = 0; i < filterBtn.length; i++) {
 }
 
 
-
 // contact form variables
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
@@ -113,9 +112,11 @@ for (let i = 0; i < navigationLinks.length; i++) {
   });
 }
 
+// document click sound
 const clickSound = new Audio('click.ogg');
 
 
+// custom mouse following cursor
 const cursorDot = document.querySelector("[data-cursor-dot]")
 const cursorOutline = document.querySelector("[data-cursor-outline]")
 
@@ -127,19 +128,24 @@ window.addEventListener("mousemove", (e) => {
   cursorDot.style.top = `${posY}px`
 
   document.addEventListener('mousedown', () => {
-    cursorOutline.style.width = '35px'; // Increase size
+    cursorOutline.style.width = '35px';
     cursorOutline.style.height = '35px';
-    clickSound.currentTime = 0; // Reset the sound to the start
-    clickSound.play(); // Play the click sound  
+    clickSound.currentTime = 0;
+    clickSound.play();
   });
 
   document.addEventListener('mouseup', () => {
-    cursorOutline.style.width = '30px'; // Original size
+    cursorOutline.style.width = '30px';
     cursorOutline.style.height = '30px';
   });
 
   cursorOutline.animate({
     left: `${posX}px`,
     top: `${posY}px`
-  }, {duration: 500, fill: "forwards"})
+  }, { duration: 500, fill: "forwards" })
 }); 
+
+function previewPDF() {
+  const pdfUrl = "resume.pdf"; 
+  window.open(pdfUrl, "_blank");
+}
