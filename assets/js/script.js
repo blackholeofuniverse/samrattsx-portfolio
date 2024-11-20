@@ -113,7 +113,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
 }
 
 // document click sound
-const clickSound = new Audio('click.ogg');
+const clickSound = new Audio('assets/audio/click.ogg');
 
 
 // custom mouse following cursor
