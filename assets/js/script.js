@@ -143,9 +143,38 @@ window.addEventListener("mousemove", (e) => {
     left: `${posX}px`,
     top: `${posY}px`
   }, { duration: 500, fill: "forwards" })
-}); 
+});
 
 function previewPDF() {
-  const pdfUrl = "resume.pdf"; 
+  const pdfUrl = "resume.pdf";
   window.open(pdfUrl, "_blank");
 }
+
+
+// Form bypassing
+document.getElementById('contact-form').addEventListener('submit', async function (event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      window.location.href = '/thank-you.html';
+    } else {
+      throw new Error('Form submission failed.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    const statusEl = document.getElementById('form-status');
+    statusEl.textContent = 'Oops! Something went wrong.';
+    statusEl.style.color = 'red';
+    statusEl.style.display = 'block';
+  }
+});
